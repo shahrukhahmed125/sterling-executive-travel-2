@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQs | Sterling Executive Travel</title>
+    <meta
+      name="description"
+      content="Frequently asked questions covering Sterling Executive Travel airport transfers, chauffeur services, bookings, and journey information."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <a href="/index.html" class="brand-wordmark" aria-label="Sterling Executive Travel home">STERLING</a>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <div class="nav-dropdown" data-dropdown>
+            <a href="/about.html" class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+              <span>About</span><span class="nav-caret" aria-hidden="true"></span>
+            </a>
+            <div class="nav-dropdown-menu" role="menu">
+              <a href="/about.html" class="dropdown-link" role="menuitem">About Us</a>
+              <a href="/faqs.html" class="dropdown-link" role="menuitem">FAQs</a>
+              <a href="/contact.html" class="dropdown-link" role="menuitem">Contact Us</a>
+            </div>
+          </div>
+          <div class="nav-dropdown" data-dropdown>
+            <a href="/services.html" class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+              <span>Services</span><span class="nav-caret" aria-hidden="true"></span>
+            </a>
+            <div class="nav-dropdown-menu" role="menu">
+              <a href="/services.html" class="dropdown-link" role="menuitem">Our Services</a>
+              <a href="/executive-chauffeur.html" class="dropdown-link" role="menuitem">Executive Chauffeur</a>
+              <a href="/corporate-travel.html" class="dropdown-link" role="menuitem">Corporate Travel</a>
+              <a href="/special-occasions.html" class="dropdown-link" role="menuitem">Special Occasions</a>
+              <a href="/luxury-experiences.html" class="dropdown-link" role="menuitem">Luxury Experiences</a>
+            </div>
+          </div>
+          <a href="/airport-transfers.html" class="nav-link">Airports</a>
+          <a href="/fleet.html" class="nav-link">Fleet</a>
+          <a href="/contact.html" class="nav-link">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <a href="/book.html" class="btn-header-cta"><span>Book Journey</span></a>
+          <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Toggle navigation menu">
+            <span class="menu-line"></span><span class="menu-line"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-drawer" id="mobileDrawer" hidden>
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a href="/index.html" class="mobile-nav-link">Home</a>
+        <a href="/about.html" class="mobile-nav-link">About Us</a>
+        <a href="/services.html" class="mobile-nav-link">Our Services</a>
+        <a href="/airport-transfers.html" class="mobile-nav-link">Airport Transfers</a>
+        <a href="/executive-chauffeur.html" class="mobile-nav-link">Executive Chauffeur</a>
+        <a href="/corporate-travel.html" class="mobile-nav-link">Corporate Travel</a>
+        <a href="/special-occasions.html" class="mobile-nav-link">Special Occasions</a>
+        <a href="/luxury-experiences.html" class="mobile-nav-link">Luxury Experiences</a>
+        <a href="/fleet.html" class="mobile-nav-link">Our Fleet</a>
+        <a href="/faqs.html" class="mobile-nav-link">FAQs</a>
+        <a href="/contact.html" class="mobile-nav-link">Contact Us</a>
+        <a href="/book.html" class="btn-luxury btn-luxury-primary mobile-drawer-cta">
+          <span class="btn-label">Book Your Journey</span><span class="btn-arrow" aria-hidden="true">&#8594;</span>
+        </a>
+      </nav>
+    </div>
+
+    <main id="main-content">
+      <section class="inner-hero" aria-label="Frequently Asked Questions">
+        <div class="inner-hero-bg media-frame">
+          <img
+            src="/src/assets/images/fleet_range_rover_1794910552895.jpg"
+            alt="Black Range Rover Autobiography outside a Georgian London townhouse at night"
+            class="inner-hero-bg-img"
+            referrerpolicy="no-referrer"
+          />
+        </div>
+        <div class="inner-hero-scrim" aria-hidden="true"></div>
+        <div class="container inner-hero-content">
+          <nav class="inner-breadcrumb" aria-label="Breadcrumb">
+            <a href="/index.html">Home</a>
+            <span aria-hidden="true">/</span>
+            <span>FAQs</span>
+          </nav>
+          <p class="inner-eyebrow">Client Information</p>
+          <div class="inner-hero-rule" aria-hidden="true"></div>
+          <h1 class="inner-hero-title">
+            <span class="mask-line"><span class="mask-inner">Frequently Asked</span></span>
+            <span class="mask-line"><span class="mask-inner">Questions.</span></span>
+          </h1>
+          <p class="inner-hero-subtitle">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+          </p>
+        </div>
+      </section>
+
+      <section class="page-band page-band--midnight">
+        <div class="container">
+          <div class="filter-bar" role="group" aria-label="Filter FAQ topics">
+            <button type="button" class="filter-btn is-active" data-faq-filter="all">All Topics</button>
+            <button type="button" class="filter-btn" data-faq-filter="airport">Airport Transfers</button>
+            <button type="button" class="filter-btn" data-faq-filter="chauffeur">Chauffeur Services</button>
+            <button type="button" class="filter-btn" data-faq-filter="bookings">Bookings</button>
+            <button type="button" class="filter-btn" data-faq-filter="journey">Journey Information</button>
+          </div>
+
+          <div class="faq-list">
+            <!-- Airport Transfers -->
+            <article class="faq-item is-open" data-faq-topic="airport">
+              <button type="button" class="faq-trigger" aria-expanded="true">
+                <span class="faq-question-wrap">
+                  <span class="faq-category-label">Airport Transfers</span>
+                  <span class="faq-question">Which airports and cruise terminals do you cover?</span>
+                </span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq-item" data-faq-topic="airport">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span class="faq-question-wrap">
+                  <span class="faq-category-label">Airport Transfers</span>
+                  <span class="faq-question">How do meet and greet and flight monitoring work?</span>
+                </span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Chauffeur Services -->
+            <article class="faq-item" data-faq-topic="chauffeur">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span class="faq-question-wrap">
+                  <span class="faq-category-label">Chauffeur Services</span>
+                  <span class="faq-question">Can I book a chauffeur for hourly, half-day, or full-day hire?</span>
+                </span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq-item" data-faq-topic="chauffeur">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span class="faq-question-wrap">
+                  <span class="faq-category-label">Chauffeur Services</span>
+                  <span class="faq-question">Do you accommodate corporate accounts and financial roadshows?</span>
+                </span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Bookings -->
+            <article class="faq-item" data-faq-topic="bookings">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span class="faq-question-wrap">
+                  <span class="faq-category-label">Bookings</span>
+                  <span class="faq-question">How do I submit a booking enquiry?</span>
+                </span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq-item" data-faq-topic="bookings">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span class="faq-question-wrap">
+                  <span class="faq-category-label">Bookings</span>
+                  <span class="faq-question">Can I request a specific vehicle category or group transport?</span>
+                </span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Journey Information -->
+            <article class="faq-item" data-faq-topic="journey">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span class="faq-question-wrap">
+                  <span class="faq-category-label">Journey Information</span>
+                  <span class="faq-question">Do you offer long-distance UK journeys and countryside tours?</span>
+                </span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq-item" data-faq-topic="journey">
+              <button type="button" class="faq-trigger" aria-expanded="false">
+                <span class="faq-question-wrap">
+                  <span class="faq-category-label">Journey Information</span>
+                  <span class="faq-question">Can additional stops or bespoke requests be included?</span>
+                </span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-final-cta">
+        <div class="final-cta-backdrop media-frame">
+          <img
+            src="/src/assets/images/hero_scene_london_skyline_1794910550156.jpg"
+            alt="Black executive vehicle overlooking London skyline"
+            class="final-cta-img"
+            referrerpolicy="no-referrer"
+          />
+          <div class="final-cta-scrim" aria-hidden="true"></div>
+        </div>
+        <div class="container final-cta-inner reveal-block">
+          <p class="section-eyebrow">Further Assistance</p>
+          <h2 class="final-cta-heading">Have a Specific Question?</h2>
+          <p class="final-cta-copy">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
+          </p>
+          <div class="final-cta-actions" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+            <a href="/contact.html" class="btn-luxury btn-luxury-gold">
+              <span class="btn-label">Contact Us</span>
+              <span class="btn-arrow" aria-hidden="true">&#8594;</span>
+            </a>
+            <a href="/book.html" class="btn-luxury btn-luxury-outline">
+              <span class="btn-label">Book Your Journey</span>
+              <span class="btn-arrow" aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-directory">
+          <div class="footer-brand-col">
+            <a href="/index.html" class="brand-wordmark">STERLING</a>
+            <p class="footer-address">Sterling Executive Travel · London</p>
+            <p class="footer-contact tabular-num">
+              <a href="tel:07833116469">07833116469</a>
+              <span aria-hidden="true">·</span>
+              <a href="mailto:qias782@gmail.com">qias782@gmail.com</a>
+            </p>
+          </div>
+          <div class="footer-col">
+            <h3 class="footer-col-title">Services</h3>
+            <ul class="footer-links">
+              <li><a href="/services.html">Our Services</a></li>
+              <li><a href="/airport-transfers.html">Airport Transfers</a></li>
+              <li><a href="/executive-chauffeur.html">Executive Chauffeur</a></li>
+              <li><a href="/corporate-travel.html">Corporate Travel</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3 class="footer-col-title">Experiences</h3>
+            <ul class="footer-links">
+              <li><a href="/special-occasions.html">Special Occasions</a></li>
+              <li><a href="/luxury-experiences.html">Luxury Experiences</a></li>
+              <li><a href="/fleet.html">Our Fleet</a></li>
+              <li><a href="/book.html">Book Your Journey</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3 class="footer-col-title">Company</h3>
+            <ul class="footer-links">
+              <li><a href="/about.html">About Us</a></li>
+              <li><a href="/faqs.html">FAQs</a></li>
+              <li><a href="/contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Sterling Executive Travel. All rights reserved.</span>
+          <div class="footer-legal">
+            <a href="/book.html">Reserve Chauffeur</a>
+            <span aria-hidden="true">·</span>
+            <a href="/contact.html">Enquiries</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
