@@ -13,10 +13,6 @@
      ------------------------------------------------------------------------ */
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
   const lerp = (start, end, t) => start + (end - start) * t;
-  const smoothstep = (edge0, edge1, x) => {
-    const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
-    return t * t * (3 - 2 * t);
-  };
 
   /* ------------------------------------------------------------------------
      1. Navigation: Scroll transition + Mobile drawer
@@ -49,160 +45,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     2. Signature 4-Scene Scroll-Controlled Cinematic Hero
-     ------------------------------------------------------------------------ */
-  const heroSection = document.getElementById('hero');
-  const heroScenes = Array.from(document.querySelectorAll('.hero-scene'));
-  const chapterButtons = Array.from(document.querySelectorAll('.chapter-btn'));
-
-  // Timeline segments across overall scroll progress [0..1]
-  // Scene 0: visible 0.00 -> 0.28 (zooms 1.00 -> 1.30)
-  // Scene 1: enters 0.20 -> 0.30, active until 0.54 (zooms 1.00 -> 1.28)
-  // Scene 2: enters 0.46 -> 0.56, active until 0.78 (zooms 1.00 -> 1.26)
-  // Scene 3: enters 0.70 -> 0.80, active until 1.00 (slow zoom-out 1.22 -> 1.02)
-  const SCENE_CONFIG = [
-    { start: 0.0, enterEnd: 0.0, exitStart: 0.21, end: 0.29, scaleFrom: 1.0, scaleTo: 1.3, panX: -14 },
-    { start: 0.20, enterEnd: 0.30, exitStart: 0.46, end: 0.54, scaleFrom: 1.02, scaleTo: 1.28, panX: 16 },
-    { start: 0.46, enterEnd: 0.56, exitStart: 0.71, end: 0.79, scaleFrom: 1.0, scaleTo: 1.26, panX: -12 },
-    { start: 0.70, enterEnd: 0.80, exitStart: 1.0, end: 1.0, scaleFrom: 1.22, scaleTo: 1.02, panX: 10 },
-  ];
-
-  let activeChapter = 0;
-
-  function setReducedMotionChapter(index) {
-    activeChapter = index;
-    heroScenes.forEach((scene, i) => {
-      const active = i === index;
-      scene.classList.toggle('is-active', active);
-      scene.classList.toggle('is-visible', active);
-      scene.setAttribute('aria-hidden', String(!active));
-    });
-    chapterButtons.forEach((btn, i) => {
-      const active = i === index;
-      btn.classList.toggle('is-active', active);
-      btn.setAttribute('aria-selected', String(active));
-      btn.style.setProperty('--chapter-progress', active ? '1' : '0');
-    });
-  }
-
-  function renderHeroScroll(progress) {
-    if (!heroScenes.length) return;
-
-    if (prefersReducedMotion.matches) {
-      setReducedMotionChapter(activeChapter);
-      return;
-    }
-
-    // Determine active copy chapter cleanly
-    let nextActive = 0;
-    if (progress >= 0.73) nextActive = 3;
-    else if (progress >= 0.49) nextActive = 2;
-    else if (progress >= 0.24) nextActive = 1;
-    else nextActive = 0;
-
-    activeChapter = nextActive;
-
-    heroScenes.forEach((scene, idx) => {
-      const cfg = SCENE_CONFIG[idx];
-      const isVisible =
-        idx === 0
-          ? progress <= cfg.end + 0.05
-          : progress >= cfg.start - 0.03 && progress <= (idx === 3 ? 1.02 : cfg.end + 0.05);
-
-      scene.classList.toggle('is-visible', isVisible);
-
-      const isActiveCopy = idx === nextActive;
-      scene.classList.toggle('is-active', isActiveCopy);
-      scene.setAttribute('aria-hidden', String(!isActiveCopy));
-
-      if (!isVisible) {
-        scene.style.opacity = '0';
-        scene.style.zIndex = String(1 + idx);
-        return;
-      }
-
-      // Local scene zoom progress [0..1]
-      const spanEnd = idx === 3 ? 1.0 : cfg.end;
-      const localProgress = clamp((progress - cfg.start) / Math.max(0.001, spanEnd - cfg.start), 0, 1);
-
-      const scale = lerp(cfg.scaleFrom, cfg.scaleTo, localProgress);
-      const panX = lerp(0, cfg.panX, localProgress);
-
-      // Clip-path & opacity reveal for Scenes 02–04
-      let opacity = 1;
-      let clipInsetTop = 0;
-      let clipInsetBottom = 0;
-
-      if (idx > 0) {
-        const enterT = smoothstep(cfg.start, cfg.enterEnd, progress);
-        opacity = enterT;
-        if (idx === 1) {
-          // Vertical curtain reveal
-          clipInsetBottom = (1 - enterT) * 100;
-        } else if (idx === 2) {
-          // Cinematic split iris reveal
-          const half = (1 - enterT) * 46;
-          clipInsetTop = half;
-          clipInsetBottom = half;
-        } else {
-          // Horizon sweep reveal
-          clipInsetTop = (1 - enterT) * 100;
-        }
-      }
-
-      // Smooth fade-out of earlier scene copy right before transition
-      let copyOpacity = 1;
-      let copyY = 0;
-      if (idx < 3 && progress > cfg.exitStart) {
-        const exitT = smoothstep(cfg.exitStart, cfg.end - 0.02, progress);
-        copyOpacity = 1 - exitT;
-        copyY = -28 * exitT;
-      }
-
-      scene.style.zIndex = String(2 + idx);
-      scene.style.opacity = opacity.toFixed(4);
-      scene.style.clipPath = `inset(${clipInsetTop.toFixed(2)}% 0% ${clipInsetBottom.toFixed(2)}% 0%)`;
-      scene.style.setProperty('--img-scale', scale.toFixed(4));
-      scene.style.setProperty('--img-x', `${panX.toFixed(2)}px`);
-      scene.style.setProperty('--copy-opacity', copyOpacity.toFixed(4));
-      scene.style.setProperty('--copy-y', `${copyY.toFixed(2)}px`);
-    });
-
-    // Update Chapter HUD bars
-    const chapterRanges = [
-      [0.0, 0.25],
-      [0.25, 0.50],
-      [0.50, 0.75],
-      [0.75, 1.0],
-    ];
-    chapterButtons.forEach((btn, idx) => {
-      const [cStart, cEnd] = chapterRanges[idx];
-      const fill = clamp((progress - cStart) / (cEnd - cStart), 0, 1);
-      const isCurrent = idx === nextActive;
-      btn.classList.toggle('is-active', isCurrent);
-      btn.setAttribute('aria-selected', String(isCurrent));
-      btn.style.setProperty('--chapter-progress', fill.toFixed(3));
-    });
-  }
-
-  // Click chapter buttons to smoothly jump to that cinematic scene
-  const CHAPTER_SCROLL_TARGETS = [0.02, 0.34, 0.60, 0.88];
-  chapterButtons.forEach((btn, idx) => {
-    btn.addEventListener('click', () => {
-      if (prefersReducedMotion.matches) {
-        setReducedMotionChapter(idx);
-        return;
-      }
-      if (!heroSection) return;
-      const heroTop = heroSection.offsetTop;
-      const scrollRunway = Math.max(1, heroSection.offsetHeight - window.innerHeight);
-      const targetY = heroTop + scrollRunway * CHAPTER_SCROLL_TARGETS[idx];
-      window.scrollTo({ top: targetY, behavior: 'smooth' });
-    });
-  });
-
-  /* ------------------------------------------------------------------------
-     3. Introduction & Starlight Scroll Zoom Fallback (when scroll-timeline unsupported)
+     2. Introduction & Starlight Scroll Zoom Fallback (when scroll-timeline unsupported)
      ------------------------------------------------------------------------ */
   const introZoomFrame = document.getElementById('introZoomFrame');
   const introZoomImg = document.getElementById('introZoomImg');
@@ -231,20 +74,13 @@
   }
 
   /* ------------------------------------------------------------------------
-     4. Unified requestAnimationFrame Scroll Engine
+     3. Unified requestAnimationFrame Scroll Engine
      ------------------------------------------------------------------------ */
   let rafScheduled = false;
 
   function onScrollFrame() {
     rafScheduled = false;
     updateHeaderState();
-
-    if (heroSection) {
-      const heroTop = heroSection.offsetTop;
-      const scrollRunway = Math.max(1, heroSection.offsetHeight - window.innerHeight);
-      const progress = clamp((window.scrollY - heroTop) / scrollRunway, 0, 1);
-      renderHeroScroll(progress);
-    }
 
     updateSectionScrollZooms();
   }
@@ -261,7 +97,7 @@
   onScrollFrame();
 
   /* ------------------------------------------------------------------------
-     5. IntersectionObserver Reveal Animations
+     4. IntersectionObserver Reveal Animations
      ------------------------------------------------------------------------ */
   const revealBlocks = document.querySelectorAll('.reveal-block');
   if ('IntersectionObserver' in window && !prefersReducedMotion.matches) {
@@ -282,7 +118,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     6. Airport Route Estimator
+     5. Airport Route Estimator
      ------------------------------------------------------------------------ */
   const airportSelect = document.getElementById('airportSelect');
   const districtSelect = document.getElementById('districtSelect');
@@ -341,7 +177,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     7. Fleet Horizontal Carousel (Buttons + Tabs + Keyboard + Drag)
+     6. Fleet Horizontal Carousel (Buttons + Tabs + Keyboard + Drag)
      ------------------------------------------------------------------------ */
   const fleetTrack = document.getElementById('fleetTrack');
   const fleetSlides = Array.from(document.querySelectorAll('.fleet-slide'));
@@ -410,7 +246,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     8. Corporate Split Editorial Image Cross-Transition
+     7. Corporate Split Editorial Image Cross-Transition
      ------------------------------------------------------------------------ */
   const corpTabs = Array.from(document.querySelectorAll('.corp-tab'));
   const corpImages = Array.from(document.querySelectorAll('.corporate-img'));
@@ -430,7 +266,7 @@
   });
 
   /* ------------------------------------------------------------------------
-     9. Bespoke Reservation Modal & Validation
+     8. Bespoke Reservation Modal & Validation
      ------------------------------------------------------------------------ */
   const bookingModal = document.getElementById('bookingModal');
   const bookingBackdrop = document.getElementById('bookingBackdrop');
@@ -572,7 +408,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     10. Desktop Dropdown Accessibility & Active Nav Highlighting
+     9. Desktop Dropdown Accessibility & Active Nav Highlighting
      ------------------------------------------------------------------------ */
   const dropdowns = Array.from(document.querySelectorAll('[data-dropdown]'));
   dropdowns.forEach((dd) => {
@@ -609,7 +445,7 @@
   });
 
   /* ------------------------------------------------------------------------
-     11. Inner Page Parallax Image Drift
+     10. Inner Page Parallax Image Drift
      ------------------------------------------------------------------------ */
   const parallaxImgs = Array.from(document.querySelectorAll('.parallax-img'));
   if (parallaxImgs.length && !prefersReducedMotion.matches) {
@@ -629,7 +465,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     12. Airport Transfers Hub Selector (airport-transfers.html)
+     11. Airport Transfers Hub Selector (airport-transfers.html)
      ------------------------------------------------------------------------ */
   const hubTabs = Array.from(document.querySelectorAll('[data-hub-tab]'));
   const hubImg = document.getElementById('hubImg');
@@ -706,7 +542,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     13. Special Occasions Filter (special-occasions.html)
+     12. Special Occasions Filter (special-occasions.html)
      ------------------------------------------------------------------------ */
   const occasionFilterBtns = Array.from(document.querySelectorAll('[data-occasion-filter]'));
   const occasionCards = Array.from(document.querySelectorAll('.occasion-card'));
@@ -725,7 +561,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     14. Luxury Experiences Sticky Preview (luxury-experiences.html)
+     13. Luxury Experiences Sticky Preview (luxury-experiences.html)
      ------------------------------------------------------------------------ */
   const expItems = Array.from(document.querySelectorAll('[data-exp-index]'));
   const expImgs = Array.from(document.querySelectorAll('[data-exp-img]'));
@@ -745,7 +581,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     15. Fleet Gallery Filter & Interactive Viewer (fleet.html)
+     14. Fleet Gallery Filter & Interactive Viewer (fleet.html)
      ------------------------------------------------------------------------ */
   const fleetCatBtns = Array.from(document.querySelectorAll('[data-fleet-cat]'));
   const fleetThumbBtns = Array.from(document.querySelectorAll('[data-fleet-gallery]'));
@@ -850,7 +686,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     16. FAQs Animated Accordions & Topic Filter (faqs.html)
+     15. FAQs Animated Accordions & Topic Filter (faqs.html)
      ------------------------------------------------------------------------ */
   const faqFilterBtns = Array.from(document.querySelectorAll('[data-faq-filter]'));
   const faqItems = Array.from(document.querySelectorAll('.faq-item'));
@@ -886,7 +722,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     17. Dedicated Contact Page Form (contact.html)
+     16. Dedicated Contact Page Form (contact.html)
      ------------------------------------------------------------------------ */
   const contactForm = document.getElementById('contactForm');
   const contactError = document.getElementById('contactError');
@@ -930,7 +766,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     18. Dedicated Book Your Journey Page Form & Live Summary (book.html)
+     17. Dedicated Book Your Journey Page Form & Live Summary (book.html)
      ------------------------------------------------------------------------ */
   const journeyForm = document.getElementById('journeyBookingForm');
   const journeyError = document.getElementById('journeyError');

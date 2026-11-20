@@ -430,20 +430,20 @@ a {
 }
 
 /* ==========================================================================
-   SIGNATURE SCROLL-CONTROLLED CINEMATIC HERO (4 Scenes)
+   CINEMATIC VIDEO HERO
    ========================================================================== */
 
 .hero-cinema {
   position: relative;
-  height: 430vh;
+  min-height: 100vh;
+  min-height: 100svh;
   background-color: var(--bg-midnight);
 }
 
 .hero-stage {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100vh;
-  height: 100dvh;
+  height: 100svh;
   width: 100%;
   overflow: hidden;
   background-color: var(--bg-midnight);
@@ -453,18 +453,8 @@ a {
   position: absolute;
   inset: 0;
   z-index: 1;
-  opacity: 0;
-  visibility: hidden;
-  clip-path: inset(0% 0% 0% 0%);
-  will-change: opacity, clip-path;
-  pointer-events: none;
-}
-
-.hero-scene.is-visible {
   visibility: visible;
-}
-
-.hero-scene.is-active {
+  opacity: 1;
   pointer-events: auto;
 }
 
@@ -475,22 +465,12 @@ a {
   height: 100%;
 }
 
-.hero-img {
+.hero-video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
-  transform: scale(var(--img-scale, 1)) translate3d(var(--img-x, 0px), var(--img-y, 0px), 0);
-  transform-origin: center center;
-  will-change: transform;
-}
-
-.hero-img--chauffeur {
-  object-position: 62% 28%;
-}
-
-.hero-img--starlight {
-  object-position: 50% 42%;
+  object-position: center;
 }
 
 .hero-scrim {
@@ -604,34 +584,7 @@ a {
   transition: transform 0.75s var(--ease-cinema) 0.18s, opacity 0.65s ease 0.18s;
 }
 
-/* Scene Typography Entrance State when inactive */
-.hero-scene:not(.is-active) {
-  --eyebrow-y: 110%;
-  --eyebrow-opacity: 0;
-  --eyebrow-track: 0.42em;
-  --rule-scale: 0;
-  --mask-y: 108%;
-  --mask-opacity: 0;
-  --desc-y: 18px;
-  --desc-opacity: 0;
-  --cta-y: 20px;
-  --cta-opacity: 0;
-}
-
-.hero-scene.is-active {
-  --eyebrow-y: 0%;
-  --eyebrow-opacity: 1;
-  --eyebrow-track: 0.26em;
-  --rule-scale: 1;
-  --mask-y: 0%;
-  --mask-opacity: 1;
-  --desc-y: 0px;
-  --desc-opacity: 1;
-  --cta-y: 0px;
-  --cta-opacity: 1;
-}
-
-/* Hero HUD (Chapters + Scroll Prompt) */
+/* Hero scroll prompt */
 .hero-hud {
   position: absolute;
   left: 0;
@@ -648,57 +601,8 @@ a {
   pointer-events: none;
 }
 
-.hero-chapters,
 .scroll-cue {
   pointer-events: auto;
-}
-
-.hero-chapters {
-  display: flex;
-  align-items: center;
-  gap: 1.15rem;
-}
-
-.chapter-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.5rem 0.25rem;
-  min-height: 40px;
-  background: transparent;
-  border: 0;
-  color: rgba(216, 216, 213, 0.55);
-  cursor: pointer;
-  transition: color 0.3s var(--ease-luxury);
-}
-
-.chapter-btn.is-active,
-.chapter-btn:hover {
-  color: var(--text-ivory);
-}
-
-.chapter-num {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  font-variant-numeric: tabular-nums;
-}
-
-.chapter-bar {
-  display: block;
-  width: 34px;
-  height: 1px;
-  background: rgba(216, 216, 213, 0.22);
-  overflow: hidden;
-}
-
-.chapter-fill {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--accent-gold);
-  transform-origin: left center;
-  transform: scaleX(var(--chapter-progress, 0));
 }
 
 .scroll-cue {
@@ -1894,10 +1798,6 @@ a {
     display: none;
   }
 
-  .hero-cinema {
-    height: 340vh;
-  }
-
   .hero-scrim {
     background: linear-gradient(
       180deg,
@@ -1905,18 +1805,6 @@ a {
       rgba(5, 7, 11, 0.35) 35%,
       rgba(5, 7, 11, 0.92) 92%
     );
-  }
-
-  .hero-img--mayfair {
-    object-position: 62% center;
-  }
-
-  .hero-img--chauffeur {
-    object-position: 68% 22%;
-  }
-
-  .hero-img--skyline {
-    object-position: 48% center;
   }
 
   .hero-content-wrap {
@@ -1929,10 +1817,6 @@ a {
 
   .scroll-cue {
     display: none;
-  }
-
-  .chapter-bar {
-    width: 22px;
   }
 
   .planner-controls,
@@ -1974,11 +1858,7 @@ a {
     min-height: 75vh;
   }
 
-  .hero-scene:not(.is-active) {
-    display: none;
-  }
-
-  .hero-img,
+  .hero-video,
   .intro-zoom-img,
   .starlight-bg-img,
   .marquee-track {

@@ -106,22 +106,26 @@
     </div>
 
     <main id="main-content">
-      <!-- SIGNATURE SCROLL-CONTROLLED CINEMATIC HERO -->
+      <!-- CINEMATIC VIDEO HERO -->
       <section
         class="hero-cinema"
         id="hero"
-        aria-label="Sterling Executive Travel cinematic showcase"
+        aria-label="Sterling Executive Travel"
       >
-        <div class="hero-stage" id="heroStage">
-          <!-- Scene 01 -->
-          <article class="hero-scene is-active" data-scene="0" aria-hidden="false">
+        <div class="hero-stage">
+          <article class="hero-scene" aria-hidden="false">
             <div class="hero-media media-frame">
-              <img
-                src="/src/assets/images/hero_scene_london_mayfair_1794910547621.jpg"
-                alt="Black Mercedes-Maybach S-Class outside a Portland stone Mayfair residence at night"
-                class="hero-img hero-img--mayfair"
-                referrerpolicy="no-referrer"
-              />
+              <video
+                class="hero-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-hidden="true"
+              >
+                <source src="/src/assets/Sterling%20Banner.mp4" type="video/mp4" />
+              </video>
             </div>
             <div class="hero-scrim" aria-hidden="true"></div>
             <div class="hero-content-wrap">
@@ -152,162 +156,7 @@
             </div>
           </article>
 
-          <!-- Scene 02 -->
-          <article class="hero-scene" data-scene="1" aria-hidden="true">
-            <div class="hero-media media-frame">
-              <img
-                src="/src/assets/images/hero_scene_starlight_cabin_1794910548933.jpg"
-                alt="Quilted leather rear executive limousine interior with illuminated starlight ceiling"
-                class="hero-img hero-img--starlight"
-                referrerpolicy="no-referrer"
-              />
-            </div>
-            <div class="hero-scrim" aria-hidden="true"></div>
-            <div class="hero-content-wrap">
-              <div class="hero-copy">
-                <p class="hero-eyebrow">
-                  <span class="eyebrow-text">Bespoke Cabin · Starlight</span>
-                </p>
-                <div class="hero-rule" aria-hidden="true"></div>
-                <h2 class="hero-title">
-                  <span class="mask-line"><span class="mask-inner">Where Comfort</span></span>
-                  <span class="mask-line"><span class="mask-inner">Meets Luxury.</span></span>
-                </h2>
-                <p class="hero-description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
-                </p>
-                <div class="hero-cta-row">
-                  <a href="#starlight" class="btn-luxury btn-luxury-gold">
-                    <span class="btn-label">Explore the Cabin</span>
-                    <span class="btn-arrow" aria-hidden="true">&#8594;</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Scene 03 -->
-          <article class="hero-scene" data-scene="2" aria-hidden="true">
-            <div class="hero-media media-frame">
-              <img
-                src="/src/assets/images/hero_scene_chauffeur_welcome_1794910550273.jpg"
-                alt="Professional Sterling chauffeur in dark overcoat welcoming a passenger into a black S-Class"
-                class="hero-img hero-img--chauffeur"
-                referrerpolicy="no-referrer"
-              />
-            </div>
-            <div class="hero-scrim" aria-hidden="true"></div>
-            <div class="hero-content-wrap">
-              <div class="hero-copy">
-                <p class="hero-eyebrow">
-                  <span class="eyebrow-text">Discreet Protocol · 24/7</span>
-                </p>
-                <div class="hero-rule" aria-hidden="true"></div>
-                <h2 class="hero-title">
-                  <span class="mask-line"><span class="mask-inner">Your Journey,</span></span>
-                  <span class="mask-line"><span class="mask-inner">Perfectly Managed.</span></span>
-                </h2>
-                <p class="hero-description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
-                </p>
-                <div class="hero-cta-row">
-                  <a href="#airports" class="btn-luxury btn-luxury-gold">
-                    <span class="btn-label">Airport &amp; FBO Transfers</span>
-                    <span class="btn-arrow" aria-hidden="true">&#8594;</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Scene 04 -->
-          <article class="hero-scene" data-scene="3" aria-hidden="true">
-            <div class="hero-media media-frame">
-              <img
-                src="/src/assets/images/hero_scene_london_skyline_1794910550156.jpg"
-                alt="Black Mercedes executive saloon parked along the Thames against the illuminated London skyline"
-                class="hero-img hero-img--skyline"
-                referrerpolicy="no-referrer"
-              />
-            </div>
-            <div class="hero-scrim" aria-hidden="true"></div>
-            <div class="hero-content-wrap">
-              <div class="hero-copy">
-                <p class="hero-eyebrow">
-                  <span class="eyebrow-text">The Sterling Standard</span>
-                </p>
-                <div class="hero-rule" aria-hidden="true"></div>
-                <h2 class="hero-title">
-                  <span class="mask-line"><span class="mask-inner">Arrive in</span></span>
-                  <span class="mask-line"><span class="mask-inner">Distinction.</span></span>
-                </h2>
-                <p class="hero-description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident soluta accusamus impedit atque sequi facilis accusantium iste laboriosam commodi.
-                </p>
-                <div class="hero-cta-row">
-                  <button
-                    type="button"
-                    class="btn-luxury btn-luxury-gold"
-                    data-open-booking
-                    data-service="Flagship Maybach"
-                  >
-                    <span class="btn-label">Commission a Journey</span>
-                    <span class="btn-arrow" aria-hidden="true">&#8594;</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Hero Scene Chapter Rail & Progress -->
           <div class="hero-hud">
-            <div class="hero-chapters" role="tablist" aria-label="Cinematic hero chapters">
-              <button
-                type="button"
-                class="chapter-btn is-active"
-                data-chapter="0"
-                role="tab"
-                aria-selected="true"
-                aria-label="Scene 01: Travel Beyond Ordinary"
-              >
-                <span class="chapter-num">01</span>
-                <span class="chapter-bar"><span class="chapter-fill"></span></span>
-              </button>
-              <button
-                type="button"
-                class="chapter-btn"
-                data-chapter="1"
-                role="tab"
-                aria-selected="false"
-                aria-label="Scene 02: Where Comfort Meets Luxury"
-              >
-                <span class="chapter-num">02</span>
-                <span class="chapter-bar"><span class="chapter-fill"></span></span>
-              </button>
-              <button
-                type="button"
-                class="chapter-btn"
-                data-chapter="2"
-                role="tab"
-                aria-selected="false"
-                aria-label="Scene 03: Your Journey, Perfectly Managed"
-              >
-                <span class="chapter-num">03</span>
-                <span class="chapter-bar"><span class="chapter-fill"></span></span>
-              </button>
-              <button
-                type="button"
-                class="chapter-btn"
-                data-chapter="3"
-                role="tab"
-                aria-selected="false"
-                aria-label="Scene 04: Arrive in Distinction"
-              >
-                <span class="chapter-num">04</span>
-                <span class="chapter-bar"><span class="chapter-fill"></span></span>
-              </button>
-            </div>
-
             <a href="#introduction" class="scroll-cue" aria-label="Scroll to introduction">
               <span class="scroll-cue-label">Scroll to explore</span>
               <span class="scroll-cue-track" aria-hidden="true">
